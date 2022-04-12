@@ -52,6 +52,7 @@ class Generator(nn.Module):
             *   z (torch.FloatTensor): [batch_size, latent_dim, 1, 1]
         '''
         z = z.to(next(self.parameters()).device)
+        print("G forward")
         return self.decoder(z)
 
     def restore(self, ckpt_dir):
@@ -94,6 +95,7 @@ class Discriminator(nn.Module):
         )
 
     def forward(self, x):
+        print("D forward")
         return self.clf(x).view(-1, 1).squeeze(1)
 
     def restore(self, ckpt_dir):
